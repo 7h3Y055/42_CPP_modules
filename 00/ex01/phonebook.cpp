@@ -6,8 +6,8 @@ void    phonebook::add(){
     contacts[index].Fname = ft_input("First name\t: ");
     contacts[index].Lname = ft_input("Last name\t: ");
     contacts[index].Nname = ft_input("Nackname\t: ");
-    contacts[index].Pnumber = ft_input("Phone number\t: ");
-    contacts[index].Dsecret = ft_input("Dark secret\t: ");
+    contacts[index].Pnumber = ft_input_number("Phone number\t: ");
+    // contacts[index].Dsecret = ft_input("Dark secret\t: ");
     if (index == 7)
         index = 0;
     else
@@ -46,17 +46,89 @@ void    print_specific_contac(){
 
 std::string ft_input(std::string str){
     std::string input;
+    bool        good;
 
+    good = 0;
     std::cout << str;
-    while (std::getline(std::cin, input)){
-        if (input.empty()){
-            std::cout << std::endl << "Wrong input!" << std::endl;
+    while (!good){
+        if (!std::getline(std::cin, input).good()){
+            good = 1;
         }
-        else
-            break;
-        std::cout << std::endl << "Retry " << str;
+        else{
+            if (input.empty()){
+                std::cout << "[!] Wrong input!" << std::endl;
+            }
+            else
+                break;
+            std::cout << std::endl << str;
+        }
+    }
+    if (good){
+        std::cout << std::endl << "Bye" << std::endl;
+        exit(0);
     }
     return (input);
+}
+
+std::string ft_input_number(std::string str){
+    std::string input;
+    bool        good;
+
+    good = 0;
+    std::cout << str;
+    while (!good){
+        if (!std::getline(std::cin, input).good()){
+            good = 1;
+        }
+        else{
+            if (input.empty() || ft_is_valid(input)){
+                std::cout << "[!] Wrong input!" << std::endl;
+            }
+            else
+                break;
+            std::cout << std::endl << str;
+        }
+    }
+    if (good){
+        std::cout << std::endl << "Bye" << std::endl;
+        exit(0);
+    }
+    return (input);
+}
+
+int    ft_is_valid(std::string input)
+{
+    int i = 0;
+    int j = 0;
+
+    if (input[i] == '+')
+        i++;
+    while (input[i] && j < 3)
+    {
+        if (!std::isdigit(input[i]))
+            break;
+        i++;
+        j++;
+    }
+    if (input[i] && std::isspace(input[i])){
+        while (input[i] && std::isspace(input[i]))
+            i++;
+        j = 0;
+    }
+    while (input[i])
+    {
+        if (!std::isdigit(input[i]))
+            break;
+        i++;
+        j++;
+    }
+    while (input[i] && std::isspace(input[i]))
+        i++;
+
+    if (input[i] || j < 5){
+        return 1;
+    }
+    return 0;
 }
 
 void    view_contact(contact con, int index){
@@ -104,5 +176,5 @@ phonebook::phonebook(){
 }
 
 phonebook::~phonebook(){
-
+    
 }

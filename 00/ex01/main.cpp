@@ -4,32 +4,22 @@ int main()
 {
     phonebook book;
     std::string cmd;
-
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.search();
-
-    while (1){
-        std::cout << "> " ;
-        std::getline(std::cin, cmd);
+    book.add();
+    book.add();
+    book.add();
+    book.add();
+    std::cout << "> " ;
+    while (std::getline(std::cin, cmd).good()){
         if (cmd == "ADD")
             book.add();
         else if (cmd == "SEARCH")
             book.search();
         else if (cmd == "EXIT")
-            exit(0);
-        else
-            std::cout << std::endl << "Wrong input!" << std::endl;
-        cmd = "";
-        
-        // std::cin.good();
-
-        // std::cout << "> " ;
-        // std::getline(std::cin, cmd);
-        // exit(0);
+            break;
+        else if (!cmd.empty())
+            std::cout << "Wrong input!" << std::endl;
+        std::cout << "> " ;
     }
-    std::cout << std::endl;
+    std::cout << std::endl << "Bye" << std::endl;
     return 0;
 }
