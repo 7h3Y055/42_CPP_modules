@@ -1,0 +1,24 @@
+#!/bin/bash
+
+# Check if there are no arguments
+if [ "$#" -eq 0 ]; then
+commit_message="-"
+fi
+
+# Concatenate all arguments into a single string
+commit_message="$1"
+shift
+while [ "$#" -gt 0 ]; do
+    commit_message="$commit_message $1"
+    shift
+done
+
+# Add all changes
+git add .
+
+# Commit changes with the provided message
+git commit -m "$commit_message"
+
+# Push changes to the repository
+git push origin master  # Change 'master' to your branch name if needed
+

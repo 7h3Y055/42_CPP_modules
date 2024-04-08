@@ -4,10 +4,16 @@ int main()
 {
     phonebook book;
     std::string cmd;
-    book.add();
-    book.add();
-    book.add();
-    book.add();
+    // book.add();
+    // book.add();
+    // book.add();
+    // book.add();
+    // book.add();
+    // book.add();
+    // book.search();
+    // book.search();
+    // book.search();
+    // book.search();
     std::cout << "> " ;
     while (std::getline(std::cin, cmd).good()){
         if (cmd == "ADD")
