@@ -14,7 +14,6 @@ class phonebook{
     public:
         phonebook();
         ~phonebook();
-
         void    add();
         void    search();
 };
