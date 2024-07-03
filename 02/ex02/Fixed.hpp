@@ -39,12 +39,15 @@ class Fixed
         float operator-( const Fixed& );
         float operator*( const Fixed& );
         float operator/( const Fixed& );
-        // Fixed& operator++();
-        // Fixed& operator++();
-        // Fixed& operator++(int);
-        // Fixed& operator++(int);
+        Fixed &operator++();
+        Fixed &operator--();
+        Fixed operator++(int);
+        Fixed operator--(int);
 
-
+        static Fixed &min(Fixed &l, Fixed &r);
+        static Fixed &min(Fixed const &l, Fixed const &r);
+        static Fixed &max(Fixed &l, Fixed &r);
+        static Fixed &max(Fixed const &l, Fixed const &r);
         ~Fixed();
         int getRawBits( void ) const;
         void setRawBits( int const raw );
