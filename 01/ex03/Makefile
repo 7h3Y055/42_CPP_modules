@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean fclean re
-
+.SECONDARY: $(OBJS)
 clean:
 	rm -f $(OBJS)
 

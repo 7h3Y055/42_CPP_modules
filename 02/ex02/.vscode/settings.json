@@ -1,5 +1,8 @@
 {
     "files.associations": {
+        "cmath": "cpp",
+        "text_encoding": "cpp",
+        "any": "cpp",
         "array": "cpp",
         "atomic": "cpp",
         "bit": "cpp",
@@ -8,7 +11,7 @@
         "charconv": "cpp",
         "chrono": "cpp",
         "clocale": "cpp",
-        "cmath": "cpp",
+        "codecvt": "cpp",
         "compare": "cpp",
         "concepts": "cpp",
         "condition_variable": "cpp",
@@ -64,6 +67,7 @@
         "thread": "cpp",
         "cinttypes": "cpp",
         "typeinfo": "cpp",
+        "valarray": "cpp",
         "variant": "cpp"
     }
 }

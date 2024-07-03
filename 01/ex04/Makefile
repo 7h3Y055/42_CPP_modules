@@ -1,5 +1,5 @@
 NAME = sed_pro
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp sed_pro.cpp
 OBJS = $(SRCS:.cpp=.o)
 CC = c++
@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean fclean re
-
+.SECONDARY: $(OBJS)
 clean:
 	rm -f $(OBJS)
 

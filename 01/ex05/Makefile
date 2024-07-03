@@ -1,5 +1,5 @@
 NAME = harl
-CFLAGS = -std=c++98  -g3 -fsanitize=address  -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp harl.cpp
 OBJS = $(SRCS:.cpp=.o)
 CC = c++
@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean fclean re
-
+.SECONDARY: $(OBJS)
 clean:
 	rm -f $(OBJS)
 

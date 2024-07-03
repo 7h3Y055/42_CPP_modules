@@ -1,5 +1,5 @@
 NAME = zombie
-CFLAGS = -Wall -Werror -Wextra -std=c++98 #-g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp newZombie.cpp  randomChump.cpp  Zombie.cpp
 OBJS = $(SRCS:.cpp=.o)
 CC = c++
@@ -13,7 +13,7 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 .PHONY: clean fclean re
-
+.SECONDARY: $(OBJS)
 clean:
 	rm -f $(OBJS)
 

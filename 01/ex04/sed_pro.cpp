@@ -2,7 +2,6 @@
 
 int sed_pro(std::string file, std::string match, std::string replace){
     std::ifstream ifile(file.c_str());
-    std::ofstream ofile((file + ".replace").c_str());
     std::string buffer;
     size_t pos = 0;
 
@@ -17,12 +16,13 @@ int sed_pro(std::string file, std::string match, std::string replace){
             buffer.insert(pos, replace);
             pos = buffer.find(match, pos + replace.length());
         }
-    }    else{
+    } else{
         std::cout << "Empty file !" << std::endl;
         return 1;
     }
 
-    ofile << buffer ;
+    std::ofstream ofile((file + ".replace").c_str());
+    ofile << buffer;
     ifile.close();
     ofile.close();
     return 0;
