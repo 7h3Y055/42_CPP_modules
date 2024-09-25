@@ -1,5 +1,5 @@
 NAME = phonebook
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 SRCS = main.cpp phonebook.cpp contact.cpp
 OBJS = $(SRCS:.cpp=.o)
 CC = c++

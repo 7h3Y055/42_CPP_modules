@@ -3,11 +3,11 @@
 
 
 void    phonebook::add(){
-    contacts[index].Fname = ft_input("First name\t: ", 0);
-    contacts[index].Lname = ft_input("Last name\t: ", 0);
-    contacts[index].Nname = ft_input("Nackname\t: ", 0);
-    contacts[index].Pnumber = ft_input_number("Phone number\t: ");
-    contacts[index].Dsecret = ft_input("Dark secret\t: ", 1);
+    contacts[index].set_fname(ft_input("First name\t: "));
+    contacts[index].set_lname(ft_input("Last name\t: "));
+    contacts[index].set_nname(ft_input("Nickname\t: "));
+    contacts[index].set_pnumber(ft_input_number("Phone number\t: "));
+    contacts[index].set_dsecret(ft_input("Dark secret\t: "));
     if (index == 7)
         index = 0;
     else
@@ -19,10 +19,10 @@ void    phonebook::search(){
     std::cout << "\t|----------------|CONTACTS☎|----------------|" << std::endl;
     std::cout << "\t+-------------------------------------------+" << std::endl;
     std::cout << "\t|     INDEX|FIRST NAME| LAST NAME|  NACKNAME|" << std::endl;
-    for (int i = 0; i < 8 && !contacts[i].Fname.empty(); i++){
+    for (int i = 0; i < 8 && !contacts[i].get_fname().empty(); i++){
         view_contact(contacts, i);
     }
-    if (contacts[0].Fname.empty()){
+    if (contacts[0].get_fname().empty()){
         std::cout << "\t+-------------------------------------------+" << std::endl;
         std::cout << "\t|                                      empty|" << std::endl;
         std::cout << "\t---------------------------------------------" << std::endl;
@@ -54,10 +54,10 @@ void    print_specific_contac(contact *contacts){
     while (getline(std::cin, input)){
         if (is_all_digit(input)){
             index = std::atoi((const char*)input.c_str()) - 1;
-            if (index > 7){
+            if (index > 7 || index < 0){
                 std::cout << "The index is out of range!" << std::endl;
             }else{
-                if (!contacts[index].Fname.length()){
+                if (!contacts[index].get_fname().length()){
                     std::cout << "The index is not in the scope!" << std::endl;
                 }
                 else{
@@ -73,19 +73,19 @@ void    print_specific_contac(contact *contacts){
 }
 
 size_t get_larger_string(contact con){
-    size_t large = con.Fname.length();
+    size_t large = con.get_fname().length();
 
-    if (large < con.Lname.length())
-        large = con.Lname.length();
+    if (large < con.get_lname().length())
+        large = con.get_lname().length();
 
-    if (large < con.Nname.length())
-        large = con.Nname.length();
+    if (large < con.get_nname().length())
+        large = con.get_nname().length();
     
-    if (large < con.Dsecret.length())
-        large = con.Dsecret.length();
+    if (large < con.get_dsecret().length())
+        large = con.get_dsecret().length();
     
-    if (large < con.Pnumber.length())
-        large = con.Pnumber.length();
+    if (large < con.get_pnumber().length())
+        large = con.get_pnumber().length();
     
     return large;
 }
@@ -99,17 +99,16 @@ void    view_contact_all(contact con)
     separator.append(y, '-');
 
     std::cout << "\t---------------" << separator  << "-" << std::endl;
-    std::cout << "\t|   First name|" << string_process_full_contact(con.Fname, y)  << "|" << std::endl;
+    std::cout << "\t|   First name|" << string_process_full_contact(con.get_fname(), y)  << "|" << std::endl;
     std::cout << "\t|-------------+" << separator  << "|" << std::endl;
-    std::cout << "\t|    Last name|" << string_process_full_contact(con.Lname, y)  << "|" << std::endl;
+    std::cout << "\t|    Last name|" << string_process_full_contact(con.get_lname(), y)  << "|" << std::endl;
     std::cout << "\t|-------------+" << separator  << "|" << std::endl;
-    std::cout << "\t|     nackname|" << string_process_full_contact(con.Nname, y)  << "|" << std::endl;
+    std::cout << "\t|     nackname|" << string_process_full_contact(con.get_nname(), y)  << "|" << std::endl;
     std::cout << "\t|-------------+" << separator  << "|" << std::endl;
-    std::cout << "\t| Phone number|" << string_process_full_contact(con.Pnumber, y)<< "|" << std::endl;
+    std::cout << "\t| Phone number|" << string_process_full_contact(con.get_pnumber(), y)<< "|" << std::endl;
     std::cout << "\t|-------------+" << separator  << "|" << std::endl;
-    std::cout << "\t|  Dark secret|" << string_process_full_contact(con.Dsecret, y)<< "|" << std::endl;
+    std::cout << "\t|  Dark secret|" << string_process_full_contact(con.get_dsecret(), y)<< "|" << std::endl;
     std::cout << "\t---------------" << separator  << "-" << std::endl;
-    
 }
 
 std::string string_process_full_contact(std::string str, size_t y){
@@ -121,7 +120,7 @@ std::string string_process_full_contact(std::string str, size_t y){
     return new_str;
 }
 
-std::string ft_input(std::string str, bool flag){
+std::string ft_input(std::string str){
     std::string input;
     bool        good;
 
@@ -134,11 +133,9 @@ std::string ft_input(std::string str, bool flag){
         else{
             if (input.empty()){
                 std::cout << "[!] Wrong input!" << std::endl;
-            }
-            else if (input.length() < 25 || flag)
+            }else{
                 break;
-            else
-                std::cout << "[!] Too long!" << std::endl;
+            }
             std::cout << std::endl << str;
         }
     }
@@ -215,9 +212,9 @@ int    ft_is_valid(std::string input)
 void    view_contact(contact *con, int index){
     std::cout << "\t+----------+----------+----------+----------+" << std::endl;
     std::cout << "\t|         " << index + 1 << "|";
-    std::cout << string_process(con[index].Fname) << "|";
-    std::cout << string_process(con[index].Lname) << "|";
-    std::cout << string_process(con[index].Nname) << "|" << std::endl;
+    std::cout << string_process(con[index].get_fname()) << "|";
+    std::cout << string_process(con[index].get_lname()) << "|";
+    std::cout << string_process(con[index].get_nname()) << "|" << std::endl;
 }
 
 std::string string_process(std::string a){
@@ -252,8 +249,7 @@ std::string replace_whitespaces(std::string str){
     return new_str;
 }
 
-phonebook::phonebook(){
-    this->index = 0;
+phonebook::phonebook():index(0){
 }
 
 phonebook::~phonebook(){

@@ -113,26 +113,39 @@ Fixed &Fixed::operator--(){
 }
 
 
-Fixed Fixed::operator++(int v){
+Fixed Fixed::operator++(int){
     Fixed tmp;
     tmp = *this;
     this->fixed_point++;
     return (tmp);
 }
 
-
-
-Fixed Fixed::operator--(int v){
+Fixed Fixed::operator--(int){
     Fixed tmp;
     tmp = *this;
     this->fixed_point--;
     return (tmp);
 }
 
-static Fixed &min(Fixed &l, Fixed &r);
-static Fixed &min(Fixed const &l, Fixed const &r);
-static Fixed &max(Fixed &l, Fixed &r);
-static Fixed &max(Fixed const &l, Fixed const &r);
+Fixed const &Fixed::min(Fixed &l, Fixed &r){
+    if (l.fixed_point < r.fixed_point) return l;
+    else return r;
+}
+
+Fixed const &Fixed::min(Fixed const &l, Fixed const &r){
+    if (l.fixed_point < r.fixed_point) return l;
+    else return r;
+}
+
+Fixed const &Fixed::max(Fixed &l, Fixed &r){
+    if (l.fixed_point > r.fixed_point) return l;
+    else return r;
+}
+
+Fixed const &Fixed::max(Fixed const &l, Fixed const &r){
+    if (l.fixed_point > r.fixed_point) return l;
+    else return r;
+}
 
 
 

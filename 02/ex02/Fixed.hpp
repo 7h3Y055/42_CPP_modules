@@ -1,21 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-// >
-// <
-// >=
-// <=
-// ==
-// !=
-// +
-// -
-// *
-// /
-// a++
-// ++a
-// a--
-// --a
-
 class Fixed
 {
     private:
@@ -27,7 +12,6 @@ class Fixed
         Fixed(const float n);
         Fixed(const Fixed &obj);
         Fixed& operator=( const Fixed& );
-
 
         bool operator<( const Fixed& );
         bool operator>( const Fixed& );
@@ -44,10 +28,11 @@ class Fixed
         Fixed operator++(int);
         Fixed operator--(int);
 
-        static Fixed &min(Fixed &l, Fixed &r);
-        static Fixed &min(Fixed const &l, Fixed const &r);
-        static Fixed &max(Fixed &l, Fixed &r);
-        static Fixed &max(Fixed const &l, Fixed const &r);
+        static Fixed const &min(Fixed &l, Fixed &r);
+        static Fixed const &min(Fixed const &l, Fixed const &r);
+        static Fixed const &max(Fixed &l, Fixed &r);
+        static Fixed const &max(Fixed const &l, Fixed const &r);
+        
         ~Fixed();
         int getRawBits( void ) const;
         void setRawBits( int const raw );

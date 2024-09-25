@@ -1,19 +1,20 @@
 #include "phonebook.hpp"
 
+void    print_help(){
+    std::cout << "\t+----------------------------------+" << std::endl;
+    std::cout << "\t|                           OPTIONS|" << std::endl;
+    std::cout << "\t+----------------------------------+" << std::endl;
+    std::cout << "\t|    ADD|         Add a new contact|" << std::endl;
+    std::cout << "\t| SEARCH|      Search for a contact|" << std::endl;
+    std::cout << "\t|   EXIT|      Exit the application|" << std::endl;
+    std::cout << "\t+----------------------------------+" << std::endl;
+}
+
 int main()
 {
     phonebook book;
     std::string cmd;
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.add();
-    // book.search();
-    // book.search();
-    // book.search();
-    // book.search();
+    print_help();
     std::cout << "> " ;
     while (std::getline(std::cin, cmd).good()){
         if (cmd == "ADD")

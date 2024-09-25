@@ -1,21 +1,26 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main()
 {
-    ClapTrap a;
-    ClapTrap b("wolf");
+	ScavTrap c;
+	ScavTrap d("wolf");
+	std::cout << std::endl << std::endl;
 
+	c.attack("sheep1");
+	c.takeDamage(10);
+	c.beRepaired(5);
+	c.beRepaired(5);
+	c.guardGate();
+	c.guardGate();
 
-    a.attack("cheep1");
-    a.takeDamage(10);
-    a.takeDamage(10);
-    a.beRepaired(5);
-    a.attack("cheep2");
+	std::cout << std::endl << std::endl;
 
-    b.beRepaired(3);
-    for (int i = 0; i < 12; i++)
-        b.attack("cheep3");
-    b.beRepaired(3);
+	d.attack("sheep2");
+	d.takeDamage(101);
+	d.takeDamage(15);
+	c.beRepaired(5);
+	d.attack("sheep3");
 
+	std::cout << std::endl << std::endl;
 	return (0);
 }
