@@ -2,6 +2,7 @@
 
 int main()
 {
+
     {
         std::cout << "Test 1" << std::endl;
         Bureaucrat a("A", 1);

@@ -24,7 +24,7 @@ void        Bureaucrat::increment(){
 void        Bureaucrat::decrement(){
     try{
         if (grade == 150){
-            throw Bureaucrat::GradeTooHighException();
+            throw Bureaucrat::GradeTooLowException();
         }
         grade++;
     }
@@ -32,6 +32,7 @@ void        Bureaucrat::decrement(){
         std::cout << e.what() << std::endl;
     }
 }
+
 char const *Bureaucrat::GradeTooHighException::what() const throw(){
     return "[!] Grade Too High Exception";
 }

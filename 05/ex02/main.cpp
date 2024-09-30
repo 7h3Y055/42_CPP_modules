@@ -1,30 +1,36 @@
-#include "AForm.hpp"
+#include "Bureaucrat.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
-    {
-        std::cout << "Test 1" << std::endl;
-        Bureaucrat a("A", 1);
-        AForm      b("B", 150);
 
-        a.signAForm(b);
+    std::cout << "test 1: " << std::endl;
+    {
+        Bureaucrat b1("b1", 1);
+        ShrubberyCreationForm s1("s1");
+        
+        b1.signForm(s1);
+        b1.executeForm(s1);
     }
 
+    std::cout << std::endl << "test 2: " << std::endl;
     {
-        std::cout << std::endl << "Test 2" << std::endl;
-        Bureaucrat a("A", 10);
-        AForm      b("B", 10);
-
-        a.signAForm(b);
+        Bureaucrat b2("b2", 1);
+        RobotomyRequestForm r1("r1");
+        
+        b2.signForm(r1);
+        b2.executeForm(r1);
     }
 
+    std::cout << std::endl << "test 3: " << std::endl;
     {
-        std::cout << std::endl << "Test 3" << std::endl;
-        Bureaucrat a("A", 150);
-        AForm      b("B", 10);
-
-        a.signAForm(b);
+        Bureaucrat b3("b3", 1);
+        PresidentialPardonForm p1("p1");
+        
+        b3.signForm(p1);
+        b3.executeForm(p1);
     }
-
     return 0;
 }

@@ -1,7 +1,7 @@
 NAME = Bureaucrat
-SRCS = Bureaucrat.cpp  main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS = Bureaucrat.cpp  main.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 
 CXX = c++
 
 

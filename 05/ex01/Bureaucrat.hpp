@@ -1,5 +1,4 @@
-#ifndef Bureaucrat_HPP
-# define Bureaucrat_HPP
+#pragma once
 
 #include <iostream>
 #include <stdexcept>
@@ -19,7 +18,6 @@ class Bureaucrat
         Bureaucrat &operator=(const Bureaucrat &);
         ~Bureaucrat();
 
-
         class GradeTooHighException  : public std::exception{
             public:
                 const char* what() const throw();
@@ -37,4 +35,3 @@ class Bureaucrat
         void    signForm(Form &form);
 };
 
-#endif

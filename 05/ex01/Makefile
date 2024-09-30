@@ -1,7 +1,7 @@
 NAME = Bureaucrat
 SRCS = Bureaucrat.cpp  main.cpp Form.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -fsanitize=address -g
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 
 CXX = c++
 
 
