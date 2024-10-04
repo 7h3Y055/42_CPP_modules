@@ -1,7 +1,7 @@
-NAME = converter
-SRCS = main.cpp  ScalarConverter.cpp Type.cpp
+NAME = serialization
+SRCS = main.cpp  Serializer.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -std=c++98 -Wall -Werror -Wextra -fsanitize=address
+CXXFLAGS = -std=c++98 #-Wall -Werror -Wextra
 CXX = c++
 
 
@@ -21,3 +21,5 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+
