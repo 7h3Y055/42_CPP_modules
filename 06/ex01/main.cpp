@@ -1,11 +1,31 @@
 #include "Serializer.hpp"
 
 
+int main()
+{
+    Data* data = new Data();
+    data->name = "John";
+    data->age = 25;
+    data->a = 3.14;
 
-#include <bitset>
-#include <climits>
+    uintptr_t serialized = Serializer::serialize(data);
+    Data* deserialized = Serializer::deserialize(serialized);
+
+    std::cout << "Name: " << deserialized->name << std::endl;
+    std::cout << "Age: " << deserialized->age << std::endl;
+    std::cout << "A: " << deserialized->a << std::endl;
+    return 0;
+}
 
 
+
+
+
+
+
+
+// #include <bitset>
+// #include <climits>
 // void show_binrep(int n)
 // {
 //     uint32_t* ptr = reinterpret_cast<uint32_t*>(&n);
@@ -30,21 +50,3 @@
 //     std::cout << "binary of " << *d << " =>\t"; show_binrep(*d);
 //     return 0;
 // }
-
-
-
-int main()
-{
-    Data* data = new Data();
-    data->name = "John";
-    data->age = 25;
-    data->a = 3.14;
-
-    uintptr_t serialized = Serializer::serialize(data);
-    Data* deserialized = Serializer::deserialize(serialized);
-
-    std::cout << "Name: " << deserialized->name << std::endl;
-    std::cout << "Age: " << deserialized->age << std::endl;
-    std::cout << "A: " << deserialized->a << std::endl;
-    return 0;
-}
