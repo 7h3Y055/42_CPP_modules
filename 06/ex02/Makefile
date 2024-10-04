@@ -1,7 +1,7 @@
 NAME = Identify
 SRCS = main.cpp  utils.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -std=c++98 -Wall -Werror -Wextra -g -fsanitize=address
+CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 CXX = c++
 
 

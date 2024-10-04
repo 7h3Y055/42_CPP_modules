@@ -51,7 +51,6 @@ void identify(Base& p){
             }
             catch(const std::exception& e){
                 std::cout << "[!] Undefined type" << std::endl;
-                std::cerr << e.what() << std::endl;
             }
         }
     }
