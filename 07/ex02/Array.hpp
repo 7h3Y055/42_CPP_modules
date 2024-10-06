@@ -1,9 +1,4 @@
 #pragma once
-#include "Array.tpp"
-#include <iostream>
-#include <execution>
-
-
 
 template <class T>
 class Array
@@ -17,7 +12,7 @@ public:
     Array(unsigned int n):n(n){
         arr = new T[n];
     }
-    Array(Array const &copy){
+    Array(Array const &copy):n(copy.n){
         arr = new T[copy.size()];
         for (int i = 0; i < copy.size(); i++){
             arr[i] = copy.arr[i];
@@ -25,6 +20,7 @@ public:
     }
     Array &operator=(Array const &copy){
         if (this != &copy){
+            n = copy.n;
             if (!arr)
                 arr = new T[copy.size()];
             else{
