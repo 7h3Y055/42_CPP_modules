@@ -1,7 +1,7 @@
 NAME = btc
 SRCS = BitcoinExchange.cpp check_input_file.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -std=c++98 #-Wall -Werror -Wextra
+CXXFLAGS = -std=c++98 -fsanitize=address #-Wall -Werror -Wextra
 CXX = c++
 
 
