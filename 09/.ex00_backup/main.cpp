@@ -8,11 +8,12 @@ int main(int argc, char const *argv[])
         if (argc == 2)
             BitcoinExchange(argv[1]);
         else
-            throw std::invalid_argument("Invalid number of arguments.");
+            throw std::invalid_argument("could not open file");
     }
     catch(const std::exception& e)
     {
         std::cout << "Error: "  << e.what() << "." << std::endl;
     }
+    
     return 0;
 }
