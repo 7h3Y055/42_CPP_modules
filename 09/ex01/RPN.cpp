@@ -1,10 +1,7 @@
 #include "RPN.hpp"
 
 bool valid_num_op(std::string str, double i){
-    if ((!std::isspace(str[i]) &&
-            (i == 0 || str[i - 1] == '-' || str[i - 1] == '+' || std::isspace(str[i - 1])) && 
-            (i == str.size() - 1 || std::isspace(str[i + 1]))) || 
-    std::isspace(str[i]))
+    if ((!std::isspace(str[i]) && (i == 0 || str[i - 1] == '-' || str[i - 1] == '+' || std::isspace(str[i - 1])) && (i == str.size() - 1 || std::isspace(str[i + 1]))) || std::isspace(str[i]))
         return true;
     else if ((str[i] == '-' || str[i] == '+') && std::isdigit(str[i + 1]))
         return true;
@@ -51,11 +48,10 @@ void        execute_rpn(std::string input){
                 rpn.push(a - b);
             else if (str == "*")
                 rpn.push(a * b);
-            else if (str == "/" && b != 0)
-                rpn.push(a / b);
-            else if (b == 0){
+            else if (str == "/" && b == 0)
                 throw std::invalid_argument("[!] division by zero");
-            }
+            else if (str == "/")
+                rpn.push(a / b);
             else
                 throw std::invalid_argument("ERROR");
         }

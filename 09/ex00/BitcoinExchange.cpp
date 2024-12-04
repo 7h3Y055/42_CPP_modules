@@ -49,7 +49,8 @@ void    BitcoinExchange(char const *file_path){
         {
             std::vector<double> date = check_input_data(line);
             double price = get_closer_lower_date(database, date);
-            std::vector<std::string> input = split_string_with_multiple_delemetres(line, " \t|");
+            std::vector<std::string> input = split_string_with_multiple_delemetres(line, "|");
+            std::for_each(input.begin(), input.end(), trim);
             std::cout << input.front() << " => " << input.back() << " = ";
             double exchange_price = price * date.back();
             std::cout << exchange_price << std::endl;

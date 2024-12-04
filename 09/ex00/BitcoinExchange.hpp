@@ -22,5 +22,6 @@ double get_closer_lower_date(std::map<std::string, double> database, std::vector
 std::vector<double>    check_input_data(std::string line);
 std::vector<double> string2date(std::string str);
 void isValidDate(std::vector<double> date);
+void    trim(std::string& str);
 
 

@@ -40,7 +40,8 @@ std::map<std::string, double>    read_db_check_infile(char const *file_path){
         throw std::runtime_error("Input file (error reading first line)");
     while (std::getline(file2, line))
     {
-        strs = split_string_with_multiple_delemetres(line, " \t,");
+        strs = split_string_with_multiple_delemetres(line, ",");
+        std::for_each(strs.begin(), strs.end(), trim);
         if (strs.size() != 2)
             throw std::runtime_error("Input file (error reading line)");
         database[strs[0]] = std::atof(strs[1].c_str());
@@ -107,7 +108,8 @@ std::vector<double>    check_input_data(std::string line){
         if (i != line.size()) throw std::invalid_argument("bad input");
     }
     
-    std::vector <std::string> strs = split_string_with_multiple_delemetres(line, " \t|");
+    std::vector <std::string> strs = split_string_with_multiple_delemetres(line, "|");
+    std::for_each(strs.begin(), strs.end(), trim);
     if (strs.size() != 2)
         throw std::invalid_argument("bad input");
     double value = std::atof(strs[1].c_str());
@@ -122,3 +124,8 @@ std::vector<double>    check_input_data(std::string line){
     return date;
 }
 
+void    trim(std::string& str){
+    size_t first = str.find_first_not_of(" \t");
+    size_t last = str.find_last_not_of(" \t");
+    str = str.substr(first, (last - first + 1));
+}
