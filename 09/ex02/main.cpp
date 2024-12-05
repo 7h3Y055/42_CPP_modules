@@ -1,5 +1,6 @@
 #include "PmergeMe.hpp"
 
+
 double get_Current_Time() {
     struct timespec ts;
     clock_gettime(CLOCK_REALTIME, &ts);
@@ -12,9 +13,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     
-    PmergeMe_t pmergeme;
-    pmergeme.arr = NULL;
-    pmergeme.size = 0;
+    PmergeMe_t pmergeme = {0};
     try
     {
         check_init(argc, argv, pmergeme);

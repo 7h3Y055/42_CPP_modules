@@ -2,6 +2,7 @@
 
 #include <list>
 #include <utility>
+#include <cstddef>
 
 typedef struct PmergeMe PmergeMe_t;
 
@@ -19,10 +20,10 @@ class ft_list
 
         // algo
         void    create_pairs();
-        void    sort_pairs();
+        void    sort_pairs_swap();
+        //      ft_merge_sort
         void    create_two_groups();
-        void    sort_small_group();
-        void    insert_large_in_small_in_the_right_pos();
+        void    insert();
 
         ft_list(PmergeMe_t &pmergeme);
         ft_list(const ft_list &other);
@@ -30,3 +31,4 @@ class ft_list
         ~ft_list();
 };
 
+void   ft_merge_sort(std::list<std::pair<int, int> > &, size_t, size_t);

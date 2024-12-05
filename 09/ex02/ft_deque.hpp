@@ -2,6 +2,7 @@
 
 #include <deque>
 #include <utility>
+#include <cstddef>
 
 typedef struct PmergeMe PmergeMe_t;
 
@@ -18,10 +19,9 @@ class ft_deque
         
 
         void    create_pairs();
-        void    sort_pairs();
+        void    sort_pairs_swap();
         void    create_two_groups();
-        void    sort_small_group();
-        void    insert_large_in_small_in_the_right_pos();
+        void    insert();
 
 
         ft_deque(PmergeMe_t &pmergeme);
@@ -30,3 +30,4 @@ class ft_deque
         ~ft_deque();
 };
 
+void   ft_merge_sort(std::deque<std::pair<int, int> > &, size_t, size_t);

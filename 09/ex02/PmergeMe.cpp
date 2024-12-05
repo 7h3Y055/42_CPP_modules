@@ -1,6 +1,11 @@
 #include "PmergeMe.hpp"
 
+#define GREEN "\033[32m"
+#define RED "\033[31m"
+#define RESET "\033[0m"
+
 void print_status(PmergeMe_t pmergeme){
+
     std::cout << "Before\t\t\t: ";
     for (int i = 0; i < pmergeme.size; i++)
         std::cout << pmergeme.arr[i] << " ";
@@ -12,7 +17,7 @@ void print_status(PmergeMe_t pmergeme){
     std::cout << std::endl;
 
     std::cout << "After (std::deque)\t: ";
-    for (std::list<int>::iterator it = pmergeme.sorted_list.begin(); it != pmergeme.sorted_list.end(); it++)
+    for (std::deque<int>::iterator it = pmergeme.sorted_deque.begin(); it != pmergeme.sorted_deque.end(); it++)
         std::cout << *it << " ";
     std::cout << std::endl;
 
@@ -20,8 +25,8 @@ void print_status(PmergeMe_t pmergeme){
     double list_time = pmergeme.list_end_time - pmergeme.list_start_time;
     double deque_time = pmergeme.deque_end_time - pmergeme.deque_start_time;
 
-    std::cout << std::fixed << std::setprecision(2) << "Time to process a range of " << pmergeme.size << " elements with std::list  : " << list_time << " us" << std::endl;
-    std::cout << std::fixed << std::setprecision(2) << "Time to process a range of " << pmergeme.size << " elements with std::deque : " << deque_time << " us" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Time to process a range of " << pmergeme.size << " elements with std::list  : " << (list_time < deque_time ? GREEN : RED) << list_time << RESET << " us" << std::endl;
+    std::cout << std::fixed << std::setprecision(2) << "Time to process a range of " << pmergeme.size << " elements with std::deque : " << (deque_time < list_time ? GREEN : RED) << deque_time << RESET << " us" << std::endl;
 }
 
 

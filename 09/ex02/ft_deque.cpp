@@ -3,15 +3,15 @@
 
 
 std::deque<int> merge_insert_with_deque(PmergeMe_t &pmergeme){
-    ft_deque lst(pmergeme);
+    ft_deque list(pmergeme);
 
-    lst.create_pairs();
-    lst.sort_pairs();
-    lst.create_two_groups();
-    lst.sort_small_group();
-    lst.insert_large_in_small_in_the_right_pos();
+    list.create_pairs();
+    list.sort_pairs_swap();
+    ft_merge_sort(list.pairs, 0, list.pairs.size());
+    list.create_two_groups();
+    list.insert();
 
-    return lst.main_chain;
+    return list.main_chain;
 }
 
 
@@ -27,10 +27,54 @@ void    ft_deque::create_pairs(){
     }
 }
 
-void    ft_deque::sort_pairs(){
+void    ft_deque::sort_pairs_swap(){
     for ( std::deque<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
         if (it->first > it->second && it->second != -1)
             std::swap(it->first, it->second);
+}
+
+void   ft_merge_sort(std::deque<std::pair<int, int> > &deque, size_t start, size_t end){
+    std::deque<std::pair<int, int> > sorted_deque;
+
+    if (end - start < 2)
+        return;
+    size_t mid = start + ((end - start) / 2);
+    ft_merge_sort(deque, start, mid);
+    ft_merge_sort(deque, mid, end);
+
+    // create a copy of the two groups
+    std::deque<std::pair<int, int> > L;
+    std::deque<std::pair<int, int> > R;
+    for (size_t i = start; i < mid; i++)
+        L.push_back(std::make_pair(deque[i].first, deque[i].second));
+    for (size_t i = mid; i < end; i++)
+        R.push_back(std::make_pair(deque[i].first, deque[i].second));
+
+    size_t k = start;
+
+    // merge the two groups
+    while (L.size() && R.size()) {
+        if (L.front().first < R.front().first) {
+            deque[k] = L.front();
+            L.pop_front();
+        } else {
+            deque[k] = R.front();
+            R.pop_front();
+        }
+        k++;
+    }
+
+    // merge the remaining elements
+    while (L.size()) {
+        deque[k] = L.front();
+        L.pop_front();
+        k++;
+    }
+    while (R.size()) {
+        deque[k] = R.front();
+        R.pop_front();
+        k++;
+    }
 }
 
 void    ft_deque::create_two_groups(){
@@ -39,30 +83,6 @@ void    ft_deque::create_two_groups(){
         if (it->second != -1)
             second_chain.push_back(it->second);
     }
-}
-
-void    ft_deque::sort_small_group(){
-    if (main_chain.size() < 2)
-        return ;
-    else if (main_chain.size() == 2)
-    {
-        if (main_chain.front() > main_chain.back())
-            std::iter_swap(main_chain.begin(), ++main_chain.begin());
-        return ;
-    }
-
-    PmergeMe_t small_gr;
-    small_gr.size = main_chain.size();
-    small_gr.arr = new int[small_gr.size];
-
-    int i = 0;
-    for (std::deque<int>::iterator it = main_chain.begin(); it != main_chain.end(); it++)
-    {
-        small_gr.arr[i] = *it;
-        i++;
-    }
-    main_chain = merge_insert_with_deque(small_gr);
-    delete[] small_gr.arr;
 }
 
 std::deque<int>::iterator get_element_by_index(std::deque<int> &lst, int index) {
@@ -89,19 +109,34 @@ void    binary_insertation(std::deque<int> &lst, int n, int start, int end){
         binary_insertation(lst, n, mid + 1, end);
 }
 
-
-void    ft_deque::insert_large_in_small_in_the_right_pos(){
-    while (second_chain.size())
-    {
-        binary_insertation(main_chain, second_chain.front(), 0, main_chain.size() - 1);
-        second_chain.pop_front();
+std::deque<int> generate_Jacobsthal_deque(size_t size){
+    std::deque<int> arr;
+    size_t n2 = 0; // J_(n-2)
+    size_t n1 = 1; // J_(n-1)
+    while (n1 - 1 < size){
+        arr.push_back(n1 + 2 * n2); //  J_n=J_(n-1)+2*J_(n-2). 
+        n2 = n1;
+        n1 = arr.back();
+        for (size_t j = n1 - 1; j > n2 ; j--)
+            arr.push_back(j);
     }
+    return arr;
 }
 
-
-
-
-
+void    ft_deque::insert(){
+    std::deque<int> jacobsthal = generate_Jacobsthal_deque(second_chain.size());
+    for (std::deque<int>::iterator it = jacobsthal.begin(); it != jacobsthal.end(); it++)
+    {
+        try{
+            binary_insertation(main_chain, *get_element_by_index(second_chain, *it - 1), 0, main_chain.size() - 1);
+        }catch(...){}
+    }
+    // while (second_chain.size())
+    // {
+    //     binary_insertation(main_chain, second_chain.front(), 0, main_chain.size() - 1);
+    //     second_chain.pop_front();
+    // }
+}
 
 ft_deque::ft_deque(PmergeMe_t &pmergeme){
     for (int i = 0; i < pmergeme.size; i++)
