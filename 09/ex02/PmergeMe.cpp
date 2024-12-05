@@ -35,7 +35,7 @@ void check_init(int argc, char *argv[], PmergeMe_t &pmergeme) {
     pmergeme.arr = new int[pmergeme.size];
     for (int i = 1; i < argc; i++)
     {
-        if (std::strlen(argv[i]) > 11)
+        if (std::strlen(argv[i]) == 0)
             throw std::invalid_argument("Invalid argument!");
         for (size_t j = 0; argv[i][j]; j++)
         {
