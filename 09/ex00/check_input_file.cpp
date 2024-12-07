@@ -60,8 +60,6 @@ void isValidDate(std::vector<double> date) {
 
     if (t == -1)
         throw std::invalid_argument("invalid date");
-    // std::cout << date[0] << " " << date[1] << " " << date[2] << std::endl;
-    // std::cout << time_in.tm_year + 1900 << " " << time_in.tm_mon + 1 << " " << time_in.tm_mday << std::endl;
 
     if (time_in.tm_year + 1900 != date[0] || time_in.tm_mon + 1 != date[1] || time_in.tm_mday != date[2])
         throw std::invalid_argument("invalid date");
@@ -78,7 +76,6 @@ std::vector<double> string2date(std::string str){
     input_date_splited_int.push_back(std::atoi(input_date_splited_str[0].c_str()));
     input_date_splited_int.push_back(std::atoi(input_date_splited_str[1].c_str()));
     input_date_splited_int.push_back(std::atoi(input_date_splited_str[2].c_str()));
-    // isValidDate(input_date_splited_int);
     return input_date_splited_int;
 }
 
@@ -110,7 +107,7 @@ std::vector<double>    check_input_data(std::string line){
     
     std::vector <std::string> strs = split_string_with_multiple_delemetres(line, "|");
     std::for_each(strs.begin(), strs.end(), trim);
-    if (strs.size() != 2)
+    if (strs.size() != 2 || strs[0].empty() || strs[1].empty())
         throw std::invalid_argument("bad input");
     double value = std::atof(strs[1].c_str());
     if (value > 1000)
@@ -127,5 +124,8 @@ std::vector<double>    check_input_data(std::string line){
 void    trim(std::string& str){
     size_t first = str.find_first_not_of(" \t");
     size_t last = str.find_last_not_of(" \t");
-    str = str.substr(first, (last - first + 1));
+    if (first == std::string::npos || last == std::string::npos)
+        str = "";
+    else
+        str = str.substr(first, (last - first + 1));
 }

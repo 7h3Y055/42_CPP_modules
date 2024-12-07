@@ -106,8 +106,8 @@ void ft_list::create_two_groups(){
     }
 }
 
-std::list<int>::iterator get_element_by_index(std::list<int> &lst, int index) {
-    if (index < 0 || index >= lst.size()) {
+std::list<int>::iterator get_element_by_index(std::list<int> &lst, size_t index) {
+    if (index >= lst.size()) {
         throw std::out_of_range("Index out of range");
     }
     // std::cout << "Index: " << index << std::endl;
@@ -153,11 +153,6 @@ void    ft_list::insert(){
             binary_insertation(main_chain, *get_element_by_index(second_chain, *it - 1), 0, main_chain.size() - 1);
         }catch(...){}
     }
-    // while (second_chain.size())
-    // {
-    //     binary_insertation(main_chain, second_chain.front(), 0, main_chain.size() - 1);
-    //     second_chain.pop_front();
-    // }
 }
 
 ft_list::ft_list()
@@ -166,12 +161,18 @@ ft_list::ft_list()
 
 ft_list::ft_list(const ft_list &other)
 {
+    if (this != &other)
+        *this = other;
 }
 
 ft_list &ft_list::operator=(const ft_list &other)
 {
     if (this != &other)
     {
+        unsorted = other.unsorted;
+        pairs = other.pairs;
+        main_chain = other.main_chain;
+        second_chain = other.second_chain;
     }
     return *this;
 }

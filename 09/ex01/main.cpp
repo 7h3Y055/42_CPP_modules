@@ -15,6 +15,9 @@ int main(int argc, char const *argv[])
             std::cout << e.what() << std::endl;
         }
     }
+    else{
+        std::cout << "Usage: " << argv[0] << " \"<RPN expression>\"" << std::endl;
+    }
     return 0;
 }
 

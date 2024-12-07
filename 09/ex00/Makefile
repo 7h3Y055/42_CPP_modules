@@ -1,16 +1,16 @@
 NAME = btc
 SRCS = BitcoinExchange.cpp check_input_file.cpp main.cpp
 OBJS = $(SRCS:.cpp=.o)
-CXXFLAGS = -std=c++98 -Wall -Werror -Wextra -g -fsanitize=address
+CXXFLAGS = -std=c++98 -Wall -Werror -Wextra
 CXX = c++
 
 
-$(NAME): all
-
-all: $(OBJS)
+$(NAME): $(OBJS)
 	$(CXX) $(OBJS) $(CXXFLAGS) -o $(NAME)
 
-.o: .cpp
+all: $(NAME)
+
+%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $> -o $@
 
 clean:

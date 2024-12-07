@@ -5,8 +5,7 @@ double get_closer_lower_date(std::map<std::string, double> database, std::vector
     std::map<std::string, double>::iterator it = database.begin();
     std::map<std::string, double>::iterator lower_price;
     std::tm db_tm;
-    std::tm in_tm;
-
+    std::tm in_tm = {};
     in_tm.tm_year = date[0] - 1900;
     in_tm.tm_mon = date[1] - 1;
     in_tm.tm_mday = date[2];
@@ -31,7 +30,8 @@ double get_closer_lower_date(std::map<std::string, double> database, std::vector
     }
     if (string2date(lower_price->first)[0] == date[0] && string2date(lower_price->first)[1] == date[1] && string2date(lower_price->first)[2] == date[2])
         return database[lower_price->first];
-    lower_price--;
+    if (database.begin() != lower_price)
+        lower_price--;
     return database[(lower_price)->first];
 }
 

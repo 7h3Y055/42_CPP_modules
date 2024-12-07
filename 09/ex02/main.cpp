@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
         return 0;
     }
     
-    PmergeMe_t pmergeme = {0};
+    PmergeMe_t pmergeme = {};
     try
     {
         check_init(argc, argv, pmergeme);

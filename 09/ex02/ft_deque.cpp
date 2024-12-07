@@ -85,8 +85,8 @@ void    ft_deque::create_two_groups(){
     }
 }
 
-std::deque<int>::iterator get_element_by_index(std::deque<int> &lst, int index) {
-    if (index < 0 || index >= lst.size()) {
+std::deque<int>::iterator get_element_by_index(std::deque<int> &lst, size_t index) {
+    if (index >= lst.size()) {
         throw std::out_of_range("Index out of range");
     }
     std::deque<int>::iterator it = lst.begin();
@@ -131,11 +131,6 @@ void    ft_deque::insert(){
             binary_insertation(main_chain, *get_element_by_index(second_chain, *it - 1), 0, main_chain.size() - 1);
         }catch(...){}
     }
-    // while (second_chain.size())
-    // {
-    //     binary_insertation(main_chain, second_chain.front(), 0, main_chain.size() - 1);
-    //     second_chain.pop_front();
-    // }
 }
 
 ft_deque::ft_deque(PmergeMe_t &pmergeme){
@@ -147,11 +142,17 @@ ft_deque::ft_deque(){
 }
 
 ft_deque::ft_deque(const ft_deque &other){
+    if (this != &other)
+        *this = other;
 }
 
 ft_deque &ft_deque::operator=(const ft_deque &other){
     if (this != &other)
     {
+        unsorted = other.unsorted;
+        pairs = other.pairs;
+        main_chain = other.main_chain;
+        second_chain = other.second_chain;
     }
     return *this;
 }
